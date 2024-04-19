@@ -1,5 +1,4 @@
 block {
-  border: 0px solid black;
-  margin: 0;
+  border: 1px solid black;
   box-shadow: 0 30px 40px rgba(0,0,0,.1);
 }
