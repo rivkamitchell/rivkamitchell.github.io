@@ -33,6 +33,7 @@ function setup(){
       grid_pts.push([i,j, 0]);
     }
   }
+  
 }
 
 // This creates the 18x18 tile we want with color blue
@@ -141,12 +142,38 @@ function draw(){
   
 }
 
+function windowResized(){
+    resizeCanvas(windowWidth, windowHeight);
+    cols = 2*width/(size);
+    rows = 2*height/(size);
+  
+  for (let i = 0; i < width; i += width/cols){
+    for (let j = 0; j < height; j += height/rows){
+      grid_pts.push([i,j, 0]);
+    }
+  }
+
+  for (var element of grid_pts) {
+        fill('white');
+        rect(element[0], element[1],9,9,3);
+  }
+  grid_pts = [];
+  for (let i = 0; i < width; i += 18*width/cols){
+    for (let j = 0; j < height; j += 18*height/rows){
+      grid_pts.push([i,j, 0]);
+    }
+  }
+  
+}
 function wait(ms){
    var start = new Date().getTime();
    var end = start;
    while(end < start + ms) {
      end = new Date().getTime();
   }
+}
+function mouseClicked(){
+    noLoop();
 }
 
 
