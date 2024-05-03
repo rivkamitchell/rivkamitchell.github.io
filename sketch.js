@@ -172,8 +172,8 @@ function wait(ms){
      end = new Date().getTime();
   }
 }
-function mouseClicked(){
-    noLoop();
-}
+// function mouseClicked(){
+//     noLoop();
+// }
 
 
