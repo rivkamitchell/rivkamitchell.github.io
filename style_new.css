@@ -12,7 +12,8 @@
     text-align: center;
   }
   a {
-    padding: 5%;
+    padding-left: 5%;
+    padding-right: 2.5%;
     text-align: center;
     display: inline;
     list-style-type: none;
