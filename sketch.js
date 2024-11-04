@@ -33,7 +33,8 @@ function setup(){
       grid_pts.push([i,j, 0]);
     }
   }
-  
+
+
 }
 
 // This creates the 18x18 tile we want with color blue
