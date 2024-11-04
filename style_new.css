@@ -25,6 +25,8 @@
   .video_container {
     padding: 20pt;
     text-align: center;
+    width: 100%;
+    height: auto;
   }
   
  
