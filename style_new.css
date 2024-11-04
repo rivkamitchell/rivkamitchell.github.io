@@ -22,6 +22,12 @@
     color: black;
   }
 
+  .video_container {
+    padding: 20pt;
+    text-align: center;
+  }
+  
+ 
   p {
     color: #868686;
   }
