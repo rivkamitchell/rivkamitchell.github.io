@@ -42,6 +42,10 @@
     height: 399px;
   }
   
+  .navbar{
+    padding-left: 5%;
+    padding-right:5%;
+  }
   p {
     font-size: 9pt;
     color: #868686;
