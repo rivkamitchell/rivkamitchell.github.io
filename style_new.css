@@ -20,13 +20,13 @@
     padding:2pt;
     }
 
-  @media screen and (min-width: 769px) {
+  @media screen and (min-width: 1040px) {
       .desktop-video {
         display: block !important;
       }
     }
     /* Display the mobile video on screens 768px and narrower */
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 1040px) {
       .mobile-video {
         display: block !important;
       }
