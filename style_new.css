@@ -20,7 +20,7 @@
     padding:2pt;
     }
 
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 1170px) {
       .desktop-video {
         display: block !important;
         width: 100%;
@@ -32,7 +32,7 @@
       }
     }
     /* Display the mobile video on screens 1010px and narrower */
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 1170px) {
       .mobile-video {
         display: block !important;
         width: 100%;
