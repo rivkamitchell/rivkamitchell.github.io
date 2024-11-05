@@ -6,6 +6,7 @@
 
 
 
+
 <html>
 	
 	<div class="header">
@@ -45,29 +46,8 @@
 	
 	<div class="video_container">
 		<video id="myvid" width=90% height=auto loop autoplay muted playsinline>
-			<source src="animation.mp4" type="video/mp4">
-		</video>
-		
-		<script>
-		
-		window.onload = (event) => { myFunction( event ) };
-		
-		function myFunction( event ) 
-		{	  
-		 let myvid = document.getElementById("myvid");
-		 
-		 //# if BIGGER THAN the 800 pixels
-		 if ( screen.width > 800 ) { myvid.src = "animation.mp4"; }
-		 
-		 //# if SMALLER THAN or EQUAL-TO the 800 pixels
-		 if ( screen.width <= 800 ) { myvid.src = "animation_rotate.mp4"; }
-		 
-		 //# load URL (for playback)
-		 myvid.load();
-		  
-		}
-		
-		</script>
+            <source src="animation.mp4" type="video/mp4">
+        </video>
 	</div>
 </body>
 	
