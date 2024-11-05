@@ -4,7 +4,10 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons/css/academicons.min.css">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+
+
 <html>
+	
 	<div class="header">
 		<h1>  RIVKA MITCHELL
 		</h1>
@@ -41,10 +44,30 @@
 	<hr width="89.8%" size="2">
 	
 	<div class="video_container">
-		<video width=90% height=auto loop autoplay muted playsinline>
+		<video id="myvid" width=90% height=auto loop autoplay muted playsinline>
 			<source src="animation.mp4" type="video/mp4">
-			Your browser does not support the video tag.
-	  	</video>
+		</video>
+		
+		<script>
+		
+		window.onload = (event) => { myFunction( event ) };
+		
+		function myFunction( event ) 
+		{	  
+		 let myvid = document.getElementById("myvid");
+		 
+		 //# if BIGGER THAN the 800 pixels
+		 if ( screen.width > 800 ) { myvid.src = "animation.mp4"; }
+		 
+		 //# if SMALLER THAN or EQUAL-TO the 800 pixels
+		 if ( screen.width <= 800 ) { myvid.src = "animation_rotate.mp4"; }
+		 
+		 //# load URL (for playback)
+		 myvid.load();
+		  
+		}
+		
+		</script>
 	</div>
 </body>
 	
