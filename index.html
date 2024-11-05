@@ -45,9 +45,15 @@
 	<hr width="89.8%" size="2">
 	
 	<div class="video_container">
-		<video id="myvid" width=90% height=auto loop autoplay muted playsinline>
-            <source src="animation.mp4" type="video/mp4">
-        </video>
+		<video class="desktop-video" style="display: none" width=90% height=auto loop autoplay muted playsinline>
+			<source type="video/mp4"
+			  src="animation.mp4" >
+		  </video>
+		  
+		  <video class="mobile-video" style="display: none" width=90% height=auto loop autoplay muted playsinline>
+			<source type="video/mp4"
+			  src="animation_rotate.mp4">
+		  </video>
 	</div>
 </body>
 	

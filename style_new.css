@@ -20,18 +20,26 @@
     padding:2pt;
     }
 
-  @media screen and (min-width: 1040px) {
+  @media screen and (min-width: 768px) {
       .desktop-video {
         display: block !important;
+        width: 100%;
+        height:auto;
+        padding-top:1%;
+        padding-bottom:2%;
+        text-align: center;
+        overflow: hidden;
       }
     }
-    /* Display the mobile video on screens 768px and narrower */
-  @media screen and (max-width: 1040px) {
+    /* Display the mobile video on screens 1010px and narrower */
+  @media screen and (max-width: 768px) {
       .mobile-video {
         display: block !important;
+        width: 100%;
+        height:auto;
+        padding-top:1%;
       }
     }
-    
     
   a {
     text-align: center;
@@ -50,6 +58,8 @@
   .video_container {
     padding-top:1%;
     padding-bottom:2%;
+    padding-left:5%;
+    padding-right:5%;
     text-align: center;
     overflow: hidden;
     display: block;
