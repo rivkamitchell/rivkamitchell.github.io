@@ -1,11 +1,15 @@
 .header {
+    position: fixed;
+    z-index: 1000; 
+    top: 0;
+    left: 0;
+    width: 100%;
     padding-top: 3.5%;
     text-align: center;
     background: white;
-    color: black;
+    color: rgba(0, 0, 0, 0.833);;
     font-size: 15px;
     line-height: 0.6;
-    padding-bottom: 10pt;
     font-family:  'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
@@ -15,6 +19,7 @@
     font-size: 12pt;
     line-height: 0.6;
   }
+
   li {
     display: inline;
     padding:2pt;
@@ -25,10 +30,7 @@
         display: block !important;
         width: 100%;
         height:auto;
-        padding-top:1%;
-        padding-bottom:2%;
         text-align: center;
-        overflow: hidden;
       }
     }
     /* Display the mobile video on screens 1010px and narrower */
@@ -37,7 +39,6 @@
         display: block !important;
         width: 100%;
         height:auto;
-        padding-top:1%;
       }
     }
     
@@ -47,7 +48,7 @@
     list-style-type: none;
     margin:0;
     text-decoration: none;
-    color: black;
+    color: rgba(0, 0, 0, 0.833);;
   }
 
   .contact{
@@ -61,15 +62,14 @@
     padding-left:5%;
     padding-right:5%;
     text-align: center;
-    overflow: hidden;
-    display: block;
-    height: auto;
   }
   
-  
+
   .navbar{
+    padding: 220px;
     padding-left: 5%;
     padding-right:5%;
+    text-align: center;
   }
   p {
     font-size: 9pt;
@@ -80,7 +80,7 @@
   }
   
   i{
-    color:#868686;
+    color:#4b4b4b;
     font-size: 18pt;
   }
   i:hover{

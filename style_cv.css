@@ -1,0 +1,71 @@
+.header {
+    position: fixed;
+    z-index: 1000; 
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding-top: 3.5%;
+    text-align: center;
+    background: white;
+    color: rgba(0, 0, 0, 0.833);
+    font-size: 15px;
+    line-height: 0.6;
+    font-family:  'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+h2 {
+    text-align: left;
+    color:#FF005E;
+    
+}
+
+h4 {
+    color:rgba(0, 0, 0, 0.833);
+}
+
+  body{ 
+    text-align: left;
+    font-family:  'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 12pt;
+    padding-top: 220px;
+    padding-left: 22%;
+    padding-right:22%;
+    padding-bottom: 20%;
+  }
+
+  li {
+    display: inline;
+    padding:2pt;
+    }
+    
+  a {
+    text-align: center;
+    display: inline;
+    list-style-type: none;
+    margin:0;
+    text-decoration: none;
+    color: rgba(0, 0, 0, 0.833);
+  }
+
+  .contact{
+    font-size:15pt;
+  }
+
+  
+  p {
+    font-size: 10pt;
+    color: #4b4b4b;
+  }
+
+  a:hover {
+    color: #FF005E;
+  }
+  
+  i{
+    color:#868686;
+    font-size: 18pt;
+  }
+
+  i:hover{
+    color: #FF005E;
+  }
