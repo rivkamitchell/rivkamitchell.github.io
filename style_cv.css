@@ -16,12 +16,16 @@
 h2 {
     text-align: left;
     color:#FF005E;
-    
+    font-family:  'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 h4 {
     color:rgba(0, 0, 0, 0.833);
+    font-family:  'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 8;
+    display: inline;
 }
+
 
   body{ 
     text-align: left;
@@ -55,6 +59,7 @@ h4 {
   p {
     font-size: 10pt;
     color: #4b4b4b;
+    display: inline;
   }
 
   a:hover {
@@ -62,7 +67,8 @@ h4 {
   }
   
   i{
-    color:#868686;
+    padding-top:6pt;
+    color:#4b4b4b;
     font-size: 18pt;
   }
 
