@@ -13,10 +13,6 @@
     font-family:  'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
-h1 {
-  color:black;
-}
-
 h2 {
     text-align: left;
     color:#FF005E;
@@ -82,19 +78,5 @@ h4 {
 
   .tree{
     text-align: center;
-  }
-  
-  .figure{
-    text-align: center;
-    display: inline;
-  }
-
-  .img{
-    display: inline-block;
-    text-align: center;
-  }
-
-  figcaption{
-    font-size: 10pt;
-    font-family:'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    padding: 20pt;
   }
