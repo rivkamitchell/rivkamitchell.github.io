@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rivka Mitchell</title>
+  <meta name="keywords" content="Rivka Mitchell, Mitchell, Rivka">
+  <meta name="author" content="Rivka Mitchell">
+  <link rel="icon" href="favicon.ico">
+  <link rel="stylesheet" href="shared.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons/css/academicons.min.css">
+  <style>
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #4a5a5c;
+    }
+
+    #photo-bg {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center top;
+      filter: saturate(0.75);
+    }
+
+    .site-header {
+      position: fixed !important;
+      z-index: 999 !important;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 860px;
+      border-radius: 12px;
+      background: rgba(38, 44, 42, 0.80) !important;
+      backdrop-filter: blur(12px);
+      border: 1.5px solid rgba(200, 215, 205, 0.18);
+      padding: 28px 40px 18px;
+      text-align: center;
+      max-height: 400px;
+      overflow: hidden;
+      transition: top 0.9s ease, transform 0.9s ease;
+    }
+
+    .site-header.expanded {
+      top: 40px;
+      bottom: 40px;
+      transform: translateX(-50%);
+      max-height: none;
+      overflow-y: auto;
+      padding-bottom: 20px;
+    }
+
+    .hero {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 28px;
+      width: 100%;
+      max-width: 100%;
+      margin: 0 auto;
+      text-align: left;
+    }
+
+    .hero-top {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex: 1;
+    }
+
+    .name-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 6px;
+    }
+
+    .name-row h1 { margin: 0; }
+
+    .name-row h1 a {
+      text-decoration: none;
+      color: #eff4ee;
+      font-family: 'DM Mono', monospace;
+      font-weight: 300;
+      font-size: clamp(0.95rem, 3vw, 1.45rem);
+      letter-spacing: 0.22em;
+      position: relative;
+      left: 0.11em;
+    }
+
+    .site-nav {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 4px 8px;
+      margin: 0 0 8px;
+      font-family: 'DM Mono', monospace;
+      font-size: clamp(10pt, 1.6vw, 9pt);
+      letter-spacing: 0.08em;
+    }
+
+    .site-nav a {
+      text-decoration: none;
+      color: #c2d4c4;
+      padding: 0px 6px;
+      transition: color 0.2s;
+      white-space: nowrap;
+      min-height: 36px;
+      display: flex;
+      align-items: center;
+    }
+
+    .site-nav a:hover,
+    .site-nav a.active { color: #eff4ee; }
+
+    .site-nav .sep {
+      color: #607060;
+      font-family: 'DM Mono', monospace;
+      font-size: clamp(10pt, 1.6vw, 9pt);
+    }
+
+    .contact-icons {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 18px;
+      margin: 4px 0 0;
+      list-style: none;
+      padding: 0px;
+    }
+
+    .contact-icons li { display: flex; }
+
+    .contact-icons a {
+      color: #90aa92;
+      font-size: clamp(14pt, 3.5vw, 16pt);
+      text-decoration: none;
+      transition: color 0.2s;
+      min-width: 30px;
+      min-height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .contact-icons a:hover { color: #c8daca; }
+
+    .hero-bottom { display: contents; }
+
+    .profile-photo {
+      width: 180px;
+      height: 240px;
+      border-radius: 14px;
+      object-fit: cover;
+      object-position: center top;
+      flex-shrink: 0;
+      box-shadow: 0 12px 28px rgba(0,0,0,0.10);
+      transition: margin-top 0.9s ease;
+    }
+
+    .bio-box {
+      max-width: 620px;
+      font-family: 'EB Garamond', Georgia, serif;
+      font-size: clamp(10pt, 1.6vw, 11.5pt);
+      color: rgba(228, 240, 228, 0.92);
+      line-height: 1.7;
+      text-align: left;
+      margin-top: 2px;
+      padding: 10px;
+      transition: opacity 0.9s ease;
+    }
+
+    .bio-box p { margin: 0; }
+
+    /* ── Page content (CV / Publications) ── */
+    #page-content {
+      opacity: 0;
+      transition: opacity 0.6s ease;
+      pointer-events: none;
+    }
+    #page-content.visible {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    /* thin separator between home strip and content */
+    #page-content:not(:empty) {
+      border-top: 1px solid rgba(200, 215, 205, 0.15);
+      margin-top: 16px;
+      padding-top: 4px;
+    }
+
+    .page-body {
+      text-align: left;
+      padding: 16px 0 12px;
+      font-family: 'EB Garamond', Georgia, serif;
+      color: rgba(228, 240, 228, 0.92);
+    }
+
+    .page-body h2 {
+      font-family: 'DM Mono', monospace;
+      font-weight: 300;
+      font-size: clamp(7.5pt, 1.5vw, 9pt);
+      letter-spacing: 0.18em;
+      color: #c2d4c4;
+      text-transform: uppercase;
+      margin: 26px 0 10px;
+      border-bottom: 1px solid rgba(200, 215, 205, 0.18);
+      padding-bottom: 6px;
+    }
+
+    .page-body h2:first-child { margin-top: 0; }
+
+    .entry {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 2px 16px;
+      margin-bottom: 16px;
+    }
+
+    .entry-title {
+      font-size: clamp(9.5pt, 1.5vw, 11pt);
+      color: #eff4ee;
+      font-weight: 600;
+    }
+
+    .entry-institution {
+      font-size: clamp(9.5pt, 1.5vw, 11pt);
+      color: rgba(228, 240, 228, 0.80);
+    }
+
+    .entry-date {
+      font-family: 'DM Mono', monospace;
+      font-size: clamp(7pt, 1.2vw, 8pt);
+      color: #90aa92;
+      white-space: nowrap;
+      grid-row: 1;
+      grid-column: 2;
+      align-self: start;
+      padding-top: 2px;
+    }
+
+    .entry-desc {
+      grid-column: 1 / -1;
+      font-size: clamp(9pt, 1.4vw, 10.5pt);
+      color: rgba(228, 240, 228, 0.72);
+      line-height: 1.6;
+      margin-top: 2px;
+    }
+
+    .bullet-list {
+      padding-left: 18px;
+      margin: 0 0 8px;
+      font-size: clamp(9pt, 1.4vw, 10.5pt);
+      color: rgba(228, 240, 228, 0.80);
+      line-height: 1.7;
+    }
+
+    .bullet-list li { margin-bottom: 4px; }
+    .bullet-list a { color: inherit; }
+    .bullet-list a:hover { color: #eff4ee; }
+
+    .pub-link {
+      display: block;
+      font-size: clamp(9pt, 1.4vw, 10.5pt);
+      color: rgba(228, 240, 228, 0.80);
+      line-height: 1.65;
+      margin-bottom: 14px;
+      text-decoration: none;
+      border-left: 2px solid rgba(200, 215, 205, 0.25);
+      padding-left: 12px;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .bio-link {
+      color: inherit;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(228, 240, 228, 0.35);
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .bio-link:hover {
+      color: #eff4ee;
+      border-color: #90aa92;
+    }
+    .pub-link:hover { color: #eff4ee; border-color: #90aa92; }
+
+    @media (max-width: 760px) {
+      .site-header { width: calc(100% - 32px); padding: 18px 14px 14px; }
+      .hero { width: 100%; max-width: 100%; }
+      .hero-top { width: 100%; margin-bottom: 18px; }
+      .hero-bottom { flex-direction: column; align-items: center; gap: 18px; }
+      .bio-box { max-width: 100%; }
+      .site-nav, .contact-icons { justify-content: center; }
+      .profile-photo { width: 150px; height: 190px; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="photo-bg" style="background-image:url('background.JPG')"></div>
+
+<header class="site-header">
+  <div class="hero">
+
+    <img class="profile-photo" src="photo_1.jpg" alt="Rivka Mitchell">
+
+    <div class="hero-top">
+      <div class="name-row">
+        <h1><a href="#home" data-page="home">RIVKA MITCHELL</a></h1>
+      </div>
+      <nav class="site-nav">
+        <a href="#cv" data-page="cv">CV</a>
+        <span class="sep">&#x25CB;</span>
+        <a href="#preprints" data-page="preprints">Publications</a>
+      </nav>
+      <ul class="contact-icons">
+        <li><a href="mailto:rivkamitchell@oxfordmartin.ox.ac.uk" target="_blank" aria-label="Email"><i class="fa fa-envelope"></i></a></li>
+        <li><a href="https://www.linkedin.com/in/rivka-mitchell-1ab71a18b" target="_blank" aria-label="LinkedIn"><i class="fa fa-linkedin"></i></a></li>
+        <li><a href="https://github.com/rivkamitchell" target="_blank" aria-label="GitHub"><i class="fa fa-github"></i></a></li>
+        <li><a href="https://scholar.google.com/citations?user=NCFdDyUAAAAJ&hl=en" target="_blank" aria-label="Google Scholar"><i class="ai ai-google-scholar"></i></a></li>
+      </ul>
+      
+      
+      <div class="bio-box">
+        <p>I am a Postdoctoral Researcher at the <a href="https://aigi.ox.ac.uk/" target="_blank" class="bio-link">Oxford Martin AI Governance Initiative </a> and a Stipendiary Lecturer in Mathematics at <a href="https://www.st-hughs.ox.ac.uk/" target="_blank" class="bio-link">St. Hugh's College</a>. Previously, I obtained my DPhil in Mathematics at the University of Oxford under the supervision of <a href="https://www.stats.ox.ac.uk/~goldschm/" target = "_blank" class = "bio-link">Christina Goldschmidt</a>, where my thesis was in probability theory and more specifically random graphs with temporal structure.</p>
+        <p style="text-align:center">Feel free to reach out!</p>
+       </p>
+      </div>
+
+      
+
+      
+    </div>
+
+  </div>
+
+  <div id="page-content"></div>
+</header>
+
+<script>
+  const header      = document.querySelector('.site-header');
+  const pageContent = document.getElementById('page-content');
+  const bioBox      = document.querySelector('.bio-box');
+  const photo       = document.querySelector('.profile-photo');
+
+  const pages = {
+    home: null,
+    cv: `<main class="page-body">
+      <h2>Education</h2>
+      <div class="entry">
+        <span class="entry-title">DPhil in Mathematics</span><span class="entry-institution"> University of Oxford</span>
+        <span class="entry-date">2021 – 2025</span>
+        <span class="entry-desc">EPSRC Centre for Doctoral Training: Mathematics of Random Systems<br><strong>Supervisor:</strong> Professor Christina Goldschmidt<br><strong>Thesis:</strong> Random graphs with additional structure evolving in time.</span>
+      </div>
+      <div class="entry">
+        <span class="entry-title">MSc in Mathematics and Statistics</span><span class="entry-institution"> McGill University</span>
+        <span class="entry-date">2020 – 2021</span>
+        <span class="entry-desc"><strong>Supervisor:</strong> Professor Louigi Addario-Berry<br><strong>Thesis:</strong> Mixing times of interacting particle systems<br><strong>CGPA:</strong> 4.0</span>
+      </div>
+      <div class="entry">
+        <span class="entry-title">BSc in Honours Mathematics, Minor in Computer Science,</span><span class="entry-institution"> McGill University</span>
+        <span class="entry-date">2015 – 2020</span>
+        <span class="entry-desc"><strong>CGPA:</strong> 3.68</span>
+      </div>
+      <h2>Experience</h2>
+      <div class="entry">
+        <span class="entry-title">Postdoctoral Researcher</span><span class="entry-institution"> University of Oxford</span>
+        <span class="entry-date">2025 – present</span>
+        <span class="entry-desc">Researcher at the Oxford Martin AI Governance Initiative.</span>
+      </div>
+      <div class="entry">
+        <span class="entry-title">Stipendiary Lecturer in Mathematics</span><span class="entry-institution"> St. Hugh's College, University of Oxford</span>
+        <span class="entry-date">2022 – present</span>
+        <span class="entry-desc">Teaches tutorials to undergraduate students and assists in conducting undergraduate admissions.</span>
+        <span class="entry-desc">Courses: Analysis, Differential Equations, Groups and Group Actions, Integral Transforms, Linear Algebra, Statistics and Data Analysis
+      </div>
+      <div class="entry">
+        <span class="entry-title">Teaching Assistant</span><span class="entry-institution"> University of Oxford</span>
+        <span class="entry-date">2021 - 2023</span>
+        <span class="entry-desc">Graded assignments and assisted in tutorials for the graduate level mathematics courses.</span>
+        <span class="entry-desc"> Courses: Probability, Measure, and Martingales (2021), and Probability on Graphs and Lattices (2022, 2023).</span>
+      </div>
+      <div class="entry">
+        <span class="entry-title">Mathematics Education for Social Mobility and Excellence Academic Mentor</span><span class="entry-institution"> University of Oxford</span>
+        <span class="entry-date">2022</span>
+        <span class="entry-desc">Ran a weekly maths circle for elementary school students at Wykham Park Academy. Worked with students on problems encouraging thinking beyond process-focus.</span>
+      </div>
+      <div class="entry">
+        <span class="entry-title">Research Intern</span><span class="entry-institution"> McGill University</span>
+        <span class="entry-date">May 2018 – Sept. 2019</span>
+        <span class="entry-desc">Researched the asymptotic behavior of a family of random functions on complete binary trees under the supervision of Professor Louigi Addario-Berry.</span>
+      </div>
+      <h2>Talks, Conferences and Workshops</h2>
+      <ul class="bullet-list">
+        <li><strong>Organizer:</strong> <a href="https://davidgeldbach.wixsite.com/website" target="_blank" class="bio-link">Oxford Probability Workshop: Random discrete structures, University of Oxford, 2025</a></li>
+        <li><strong>Invited talk:</strong> Bath Probability Seminar, University of Bath, 2024</li>
+        <li><strong>Invited talk:</strong> Oxford Probability Seminar, University of Oxford, 2024</li>
+        <li><strong>Contributed talk:</strong> <a href="https://www.youtube.com/watch?v=IJdKmHX9vOE&themeRefresh=1" target="_blank" class="bio-link">RandNET Workshop: Randomness and Learning in Networks, IMPA, 2024</a></li>
+        <li><strong>Contributed talk:</strong> Junior Female Researchers in Probability Workshop in Berlin, 2024</li>
+        <li><strong>Participant:</strong> Bellair's Institute Probability &amp; Combinatorics 18th Annual Workshop, 2024</li>
+        <li><strong>Invited talk:</strong> EPSRC CDT in Random Systems Workshop, 2024</li>
+        <li><strong>Participant:</strong> Bellair's Institute Probability &amp; Combinatorics 17th Annual Workshop, 2023</li>
+      </ul>
+      <h2>Awards and Grants</h2>
+      <ul class="bullet-list">
+        <li>The Queen's College Academic Support Grant, 2024</li>
+        <li>The Queen's College Academic Support Grant, 2023</li>
+        <li>CDT in Mathematics of Random Systems Award, 2021</li>
+        <li>McGill Math &amp; Stats Grad Award, 2021</li>
+        <li>McGill Graduate Excellence Award, 2020</li>
+        <li>Mitacs Research Training Award, 2020</li>
+        <li>FQRNT Student international mobility support for team research projects (rejected due to COVID-19), 2020</li>
+        <li>NSERC Undergraduate Research Award, 2019</li>
+      </ul>
+      <h2>Additional Skills</h2>
+      <ul class="bullet-list">
+        <li><strong>Programming languages:</strong> Python, R, HTML/CSS, Javascript</li>
+        <li><strong>Languages:</strong> English, French</li>
+      </ul>
+    </main>`,
+    preprints: `<main class="page-body">
+      <h2>Preprints &amp; Publications</h2>
+      <a class="pub-link" href="https://arxiv.org/abs/2505.21823" target="_blank">
+        Addario-Berry, L., Donderwinkel, S., Goldschmidt, C., Mitchell, R. <em>Discrete snakes with globally centered displacements</em>, 2025. Preprint arXiv:2505.21823, submitted.
+      </a>
+      <a class="pub-link" href="https://arxiv.org/abs/2502.15274" target="_blank">
+        Brandenberger, A., Donderwinkel, S., Kerriou, C., Lugosi, G., Mitchell, R. <em>Temporal connectivity of random geometric graphs</em>, 2025. Preprint arXiv:2502.15274, submitted.
+      </a>
+      <a class="pub-link" href="https://doi.org/10.1214/25-EJP1283" target="_blank">
+        Buckland, M., Kolesnik, B., Mitchell, R., and Przyby&#322;owski, T. <em>Random walks on Coxeter interchange graphs</em>, 2025. <em>Electronic Journal of Probability</em> 30: 1–31.
+      </a>
+      <a class="pub-link" href="https://link.springer.com/article/10.1007/s00026-025-00768-9" target="_blank">
+        Kolesnik B., Mitchell, R., and Przyby&#322;owski, T. <em>Tournaments on signed graphs</em>, 2025. <em>Annals of Combinatorics.</em>
+      </a>
+      <a class="pub-link" href="https://link.springer.com/article/10.1007/s00440-020-00980-z" target="_blank">
+        Addario-Berry, L., Cairns, H., Devroye, L., Kerriou, C., and Mitchell, R. <em>Hipster random walks</em>, 2020. <em>Probability Theory and Related Fields</em> 178: 437–473.
+      </a>
+    </main>`
+  };
+
+  function updateNav(page) {
+    document.querySelectorAll('.site-nav a[data-page]').forEach(a => {
+      a.classList.toggle('active', a.dataset.page === page);
+    });
+  }
+
+  function centeredOffset() {
+    const heroTop = document.querySelector('.hero-top');
+    return Math.max(0, (heroTop.offsetHeight - photo.offsetHeight) / 2);
+  }
+
+  function navigateTo(page, pushState) {
+    if (page === 'home') {
+      pageContent.classList.remove('visible');
+      pageContent.innerHTML = '';
+      header.classList.remove('expanded');
+      header.scrollTop = 0;
+      // Restore bio first (hidden, no transition) so heroTop has correct height
+      bioBox.style.transition = 'none';
+      bioBox.style.opacity = '0';
+      bioBox.style.display = '';
+      // Animate photo directly to its final centred position in one move
+      requestAnimationFrame(() => {
+        photo.style.marginTop = centeredOffset() + 'px';
+        // Re-enable bio fade
+        requestAnimationFrame(() => {
+          bioBox.style.transition = '';
+          bioBox.style.opacity = '1';
+        });
+      });
+    } else {
+      const html = pages[page];
+      if (!html) return;
+      photo.style.marginTop = '0';
+      bioBox.style.opacity = '0';
+      setTimeout(() => { bioBox.style.display = 'none'; }, 400);
+      const delay = pageContent.classList.contains('visible') ? 400 : 0;
+      pageContent.classList.remove('visible');
+      setTimeout(() => {
+        pageContent.innerHTML = html;
+        header.scrollTop = 0;
+        header.classList.add('expanded');
+        setTimeout(() => pageContent.classList.add('visible'), 400);
+      }, delay);
+    }
+    updateNav(page);
+    document.title = page === 'home'      ? 'Rivka Mitchell'
+                   : page === 'cv'        ? 'Rivka Mitchell: CV'
+                   : page === 'preprints' ? 'Rivka Mitchell: Publications'
+                   : 'Rivka Mitchell';
+    if (pushState) history.pushState({ page }, '', '#' + page);
+  }
+
+  document.addEventListener('click', function(e) {
+    const a = e.target.closest('a[data-page]');
+    if (!a) return;
+    e.preventDefault();
+    navigateTo(a.dataset.page, true);
+  });
+
+  window.addEventListener('popstate', function(e) {
+    navigateTo((e.state && e.state.page) || 'home', false);
+  });
+
+  const initPage = location.hash.replace('#', '') || 'home';
+  if (pages.hasOwnProperty(initPage)) navigateTo(initPage, false);
+  if (initPage === 'home') {
+    photo.style.transition = 'none';
+    photo.style.marginTop = centeredOffset() + 'px';
+    requestAnimationFrame(() => { photo.style.transition = ''; });
+  }
+</script>
+
+</body>
+</html>
